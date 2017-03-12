@@ -9,6 +9,8 @@
 
 class UTankBarrel;
 class UTankAimingComponent;
+class UTankTurret;
+class AProjectile;
 
 UCLASS()
 class BATTLETANK_API ATank : public APawn
@@ -16,9 +18,16 @@ class BATTLETANK_API ATank : public APawn
 	GENERATED_BODY()
 
 private:
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float LaunchSpeed = 4000;
 	UPROPERTY(EditAnywhere, Category = Firing)
-	float LaunchSpeed = 100000;
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+	UTankBarrel* Barrel = nullptr;
 
+	UPROPERTY(EditDefaultsOnly, Category = Firing)
+	float ReloadTimeInSeconds = 3;
+
+	double LastFireTime = 0;
 
 protected:
 	// Called when the game starts or when spawned
@@ -35,5 +44,11 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Setup)
+	void SetTurretReference(UTankTurret* TurretToSet);
+
+	UFUNCTION(BlueprintCallable, Category = Firing)
+	void Fire();
 	
 };

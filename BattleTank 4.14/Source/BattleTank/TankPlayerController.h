@@ -21,13 +21,13 @@ public:
 	void Tick(float) override;
 
 	UPROPERTY(EditAnywhere)
-	float HitRange = 1000000.0f;
+	float HitRange = 1000000;
 
 	UPROPERTY(EditAnywhere)
 	float CrosshairXLocation = 0.5f;
 
 	UPROPERTY(EditAnywhere)
-	float CrosshairYLocation = 0.3333f;
+	float CrosshairYLocation = 0.5f;
 	
 private:
 	void AimTowardsCrosshair();
